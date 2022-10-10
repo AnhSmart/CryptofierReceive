@@ -72,7 +72,7 @@
 
     <script>
       // Config---
-      var download_url = "https://crytofierreceive.herokuapp.com/download";
+      var download_url = "https://cryptofier-receiver.herokuapp.com/download";
       var waiting_time = 1000;
       // ---------
 
