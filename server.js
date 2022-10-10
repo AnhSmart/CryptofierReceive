@@ -18,6 +18,7 @@ app.get("/download", async function (req, res, next) {
     .file(`${filename}`)
     .createReadStream() //stream is created
     .pipe(res);
+	res.send('hello');
 });
 
 var port = process.env.PORT || 5000;
