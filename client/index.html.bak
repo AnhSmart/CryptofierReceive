@@ -72,7 +72,7 @@
 
     <script>
       // Config---
-      var download_url = "https://localhost:5000/download";
+      var download_url = "http://localhost:5000/download";
       var waiting_time = 1000;
       // ---------
 
