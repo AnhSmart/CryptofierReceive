@@ -19,14 +19,15 @@ const bucketName = "test-anh";
 const bucket = cloudStorage.bucket(bucketName);
 app.get("/download", async function (req, res, next) {
   let filename = req.query.filename;
-  res.writeHead(200, {
-    "Content-Disposition": `attachment;filename=${filename}`
-  });
   await cloudStorage
     .bucket(bucketName)
     .file(`${filename}`)
     .createReadStream() //stream is created
     .pipe(res);
+  res.writeHead(200, {
+    "Content-Disposition": `attachment;filename=${filename}`
+  });
+  
 });
 
 var port = process.env.PORT || 5000;
