@@ -10,8 +10,7 @@ const cloudStorage = new Storage();
 const bucketName = "test-anh";
 const bucket = cloudStorage.bucket(bucketName);
 
-app.use(express.static("/public"));
-
+app.use(express.static(path.join(__dirname, "public")));
 
 
 app.get("/", function (req, res) {
