@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Downloader</title>
+    <!-- JavaScript Bundle with Popper -->
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="staticBackdrop"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" style="margin-top: 200px">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">
+              Download Manager
+            </h1>
+          </div>
+          <div class="modal-body">
+            <div class="d-grid gap-2">
+              <button
+                id="btnReceive"
+                type="button"
+                class="btn btn-primary btn-lg"
+              >
+                Receive
+              </button>
+              <div id="downloading">
+                <img src="burnout.gif" style="width: 100%" />
+              </div>
+            </div>
+            <div id="downloaded">
+              <div class="d-grid gap-2">
+                <div class="alert alert-success" role="alert">
+                  A simple success alert—check it out!
+                </div>
+                <button
+                  id="btnSave"
+                  type="button"
+                  class="btn btn-primary btn-lg"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Config---
+      var download_url = "http://localhost:5000/download";
+      var waiting_time = 1000;
+      // ---------
+
+      let params = new URL(document.location).searchParams;
+      let filename = params.get("filename");
+
+      waiting_time = params.get("time") || 1;
+
+      const myModalAlternative = new bootstrap.Modal("#staticBackdrop");
+      myModalAlternative.show();
+
+      var btnReceive = $("#btnReceive");
+      var downloading = $("#downloading");
+      var downloaded = $("#downloaded");
+      function UIButtons(isDownload) {
+        if (isDownload) {
+          btnReceive.hide();
+          downloading.show();
+        } else {
+          btnReceive.show();
+          downloading.hide();
+        }
+      }
+
+      $(document).ready(function () {
+        UIButtons(false);
+        downloaded.hide();
+
+        btnReceive.click(function () {
+          UIButtons(true);
+
+          setTimeout(() => {
+            downloading.hide();
+            downloaded.show();
+          }, waiting_time * 1000);
+        });
+
+        $("#btnSave").click(function () {
+          window.open(download_url + "?filename=" + filename, "_blank");
+        });
+      });
+    </script>
+  </body>
+</html>
