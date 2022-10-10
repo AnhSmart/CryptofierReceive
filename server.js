@@ -30,4 +30,4 @@ app.listen(port, () => {
   console.log(`listening at http://localhost:${port}`);
 });
 
-app.use(express.static("public"));
+app.use(express.static("/public"));
