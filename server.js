@@ -15,7 +15,8 @@ app.use(express.static("/public"));
 
 
 app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "/client/index.html"));
+	res.send("hello");
+  //res.sendFile(path.join(__dirname, "/client/index.html"));
 });
 
 app.listen(port, () => {
